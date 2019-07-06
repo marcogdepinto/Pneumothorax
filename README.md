@@ -25,7 +25,7 @@ Images without pneumothorax have a mask value of -1.
 
 `1.2.276.0.7230010.3.1.4.8323329.1034.1517875166.8504,-1`
 
-# How does this software work
+# How to run the scripts
 
 Running `examplefile.py`` it will be possible to review the example of a file structure we are working on.
 
