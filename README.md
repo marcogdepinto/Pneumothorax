@@ -1,12 +1,22 @@
 # Pneumothorax
 
-A first version of pipeline for the [Kaggle SIIM-ACR Pneumothorax Detection competition](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/).
+This repository contains a pipeline built for the [Kaggle SIIM-ACR Pneumothorax Detection competition](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/).
 
-Instructions to download the data included in the competition information.
+The goal of the competition is to develop a model to classify (and if present, segment) pneumothorax from a set of chest radiographic images in DICOM format.
 
-Pipeline built to learn how to deal with DICOM files (radiographies).
+A pneumothorax is an abnormal collection of air in the pleural space between the lung and the chest wall: it can result in death if not treated.
 
-The data is comprised of images in DICOM format and annotations in the form of image IDs and run-length-encoded (RLE) masks. 
+Pneumothorax is usually diagnosed by a radiologist on a chest x-ray, and can sometimes be very difficult to confirm. 
+
+An accurate AI algorithm to detect pneumothorax would be useful in a lot of clinical scenarios. #AI could be used to triage chest radiographs for priority interpretation, or to provide a more confident diagnosis for non-radiologists.
+
+![Radiography](https://github.com/marcogdepinto/Pneumothorax/blob/master/exampleimage/radiography.jpg)
+
+# About the dataset
+
+Instructions to download the data are included in the competition information.
+
+The data is comprised of images in DICOM format (radiographies) and annotations in the form of image IDs and run-length-encoded (RLE) masks. 
 
 Some of the images contain instances of pneumothorax (collapsed lung), which are indicated by encoded binary masks in the annotations. Some images have multiple annotations.
 
@@ -15,9 +25,11 @@ Images without pneumothorax have a mask value of -1.
 
 `1.2.276.0.7230010.3.1.4.8323329.1034.1517875166.8504,-1`
 
+# How does this software work
+
 Running `examplefile.py`` it will be possible to review the example of a file structure we are working on.
 
-The output will be as follows (using the same file I used):
+The output will be the following (using the same file I used):
 
 `(0008, 0005) Specific Character Set              CS: 'ISO_IR 100'
 (0008, 0016) SOP Class UID                       UI: Secondary Capture Image Storage
@@ -58,6 +70,6 @@ The output will be as follows (using the same file I used):
 
 To build your full dataframe, you should run ``createdataframe.py``.
 
-In the `` dataframe `` folder you will find two pickles with the dataframe I have already prepared.
+In the `` dataframe `` folder you will find two pickles with the train and test dataframes I have already prepared as output examples for the script.
 
 
