@@ -11,8 +11,6 @@ class CreateDataframe:
     def preptraindata(path):
         '''
         This method is used to load the training data.
-        Pydicom returns a list of strings, so we need to loop through the
-        ....
         '''
         count = 0
         for root, dirs, file in os.walk(path):
