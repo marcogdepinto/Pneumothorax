@@ -4,5 +4,3 @@ dcm_file_path = '/Users/marcogdepinto/PycharmProjects/Pneumothorax/dataset/dicom
 dcm_data = dcmread(dcm_file_path)
 
 print(dcm_data)
-
-
