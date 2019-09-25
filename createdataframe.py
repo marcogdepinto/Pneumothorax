@@ -1,13 +1,17 @@
 import os
 import time
 import pickle
+import argparse
 import numpy as np
 import pandas as pd
 from pydicom.filereader import dcmread
 
 
 class CreateDataframe:
-
+    """
+    This class creates a dataframe from DICOM files
+    """
+    @staticmethod
     def preptraindata(path):
         '''
         This method is used to load the training data.
@@ -17,7 +21,9 @@ class CreateDataframe:
             if not dirs:
                 continue
             else:
-                # print(root, dirs, file) # Taking first level with path in root and second level with dirs. File is empty
+                # print(root, dirs, file)
+                # Taking first level with path in root and second level with dirs.
+                # File is empty
                 for nroot, ndirs, nfile in os.walk(root):
                     if not nfile:
                         continue
@@ -32,7 +38,9 @@ class CreateDataframe:
 
                         metadata_dict = {"file_path": dcm_file_path_str}
                         metadata_dict["storage_type"] = dcm_data.SOPClassUID
-                        metadata_dict["patient_name"] = dcm_data.PatientName.family_name + " " + dcm_data.PatientName.given_name
+                        metadata_dict["patient_name"] = dcm_data.PatientName.family_name \
+                                                        + " " \
+                                                        + dcm_data.PatientName.given_name
                         metadata_dict["patient_id"] = dcm_data.PatientID
                         metadata_dict["patient_age"] = dcm_data.PatientAge
                         metadata_dict["patient_sex"] = dcm_data.PatientSex
@@ -61,7 +69,8 @@ class CreateDataframe:
                         # Insert a count. If first iteration create new dataframe.
                         # Else append data on dataframe already created
 
-                        print("--- Iteration loaded. Loading time: %s seconds ---" % (time.time() - start_time))
+                        print("--- Iteration loaded. Loading time: %s seconds ---"
+                              % (time.time() - start_time))
                         count += 1
                         print(count)
 
@@ -77,10 +86,14 @@ class CreateDataframe:
         metadata_df = metadata_df.drop(columns=['index'])
 
         # Saving dataframe to local pickle to be loaded from another module
-        with open('./dataframe/sample_images.pickle', 'wb') as f:
-            pickle.dump(metadata_df, f)
+        with open('./dataframe/sample_images.pickle', 'wb') as save_file:
+            pickle.dump(metadata_df, save_file)
 
         return metadata_df
 
-createdf = CreateDataframe.preptraindata(path='dataset/dicom-images-test') # Switch between training or test
 
+if __name__ == '__main__':
+    PARSER = argparse.ArgumentParser()
+    PARSER.add_argument("path", help="Path to get the train dataset")
+    ARGS = PARSER.parse_args()
+    CREATEDF = CreateDataframe.preptraindata(ARGS.path)
