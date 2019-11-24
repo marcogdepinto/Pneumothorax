@@ -1,3 +1,7 @@
+"""
+This files can be used to create a dataframe from multiple DICOM files.
+"""
+
 import os
 import time
 import pickle
